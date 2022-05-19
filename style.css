@@ -1,0 +1,176 @@
+body {
+    font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif;
+    background-color: white;
+	min-width: 450px;
+}
+
+h1 {
+    font-size: 1.75em;
+}
+
+h2 {
+    text-align: center;
+    font-size: 4em; 
+}
+
+td {
+    width: 50%;
+}
+
+input {
+	margin-bottom: 5px;
+}
+
+a:visited{ 
+	color: blue; 
+}
+
+.display {
+    width: 100%;
+    min-height: 400px;
+    padding-bottom: 20px;
+}
+
+.control {
+    width: 100%;
+    padding-bottom: 20px;
+}
+
+.control-button {
+    width: 100%;
+    min-height: 50px;
+}
+
+.display-box {
+    border: 2px solid black;
+}
+
+.title {
+    vertical-align: top;
+}
+
+.standby {
+    background-color: red;
+}
+
+.go {
+    background-color: green;
+}
+
+.fade {
+    background-color: yellow;
+}
+
+.off {
+    background-color: gray;
+}
+
+.hidden {
+    visibility: hidden;
+}
+
+.no-display {
+    display: none;
+}
+
+.status {
+    height: 125px;
+    vertical-align: text-top;
+    font-weight: bold;
+    margin-bottom: 10px;
+    border-bottom: 2px solid black;
+    
+}
+
+.message {
+    height: 125px;
+    max-height: 125px;
+    margin-bottom: 10px;
+    border-bottom: 2px solid black;
+    overflow: auto;
+}
+
+.msg-time {
+    color: blue;
+}
+
+.cueMsg {
+    color: orange;
+}
+
+.selfMsg {
+    color: green;
+}
+
+.peerMsg {
+    color: red;
+}
+body {
+  margin-top: 70px;
+  width: calc(100vw/2);
+  height: calc(100vw/2);
+  border: solid 5px #222;
+  position: center;
+  vertical-align: center;
+  background-color: black;
+  text-align: center;
+  font-family: 'Readex Pro', sans-serif;
+  max-width: 640px;
+  max-height: 640px;
+}
+
+div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #666666;
+  box-sizing: border-box;
+  float: left;
+  width: calc(100vw/16);
+  height: calc((100vw)/16);
+  padding: 0;
+  max-width: 80px;
+  max-height: 80px;
+  /*-webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;*/
+}
+
+html {
+  margin: auto;
+  display: table;
+  color: white;
+  background-color: black;
+}
+
+.chessboard {
+  font-size: min(calc(100vw/6), 10px);
+  color: black;
+}
+
+#result {
+  font-family: 'Times', serif;
+  margin: 0;
+  position: absolute;
+  top: 10px;
+  left: 50%;
+  transform: translate(-50%);
+}
+
+#reset {
+  position: absolute;
+  left: calc(100vw/2 - 25px);
+  top: calc(100vw/2 + 95px);
+  top: min(calc(100vw/2 + 105px), 745px);
+}
+
+img {
+  width: calc(100vw/16);
+  user-drag: none;
+  user-select: none;
+  -webkit-user-drag: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+}

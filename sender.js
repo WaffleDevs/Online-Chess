@@ -798,10 +798,10 @@ var cueString = "<span class=\"cueMsg\">Cue: </span>";
  */
 function initialize() {
     // Create own peer object with connection to shared PeerJS server
-    let chars = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890-_'
+    let chars = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'
     let password = ''
-    for (var i = 0; i < 7; i++) {
-        password = password + chars[Math.floor(Math.random()*64)]
+    for (var i = 0; i < 4; i++) {
+        password = password + chars[Math.floor(Math.random()*52)]
     }
 
     peer = new Peer(password, {

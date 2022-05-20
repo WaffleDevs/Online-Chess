@@ -5,7 +5,7 @@ var selectedpiece = {
   'takeables': []
 };
 
-let movedPeice = []
+let movedPiece = []
 
 var whiteKing = 5
 var blackKing = 61
@@ -64,8 +64,8 @@ function drawBoard(callMain) {
     removePieceImage(i + "i")
     appendPieceImage(($('#' + i).attr('class')).slice(11), i, i + "i")
   }
-  $(`#${movedPeice[0]}`).css('background-color', '#55a')
-  $(`#${movedPeice[1]}`).css('background-color', '#aaf')
+  $(`#${movedPiece[0]}`).css('background-color', '#55a')
+  $(`#${movedPiece[1]}`).css('background-color', '#aaf')
 }
 drawBoard()
 
@@ -789,18 +789,7 @@ function playSound(sound) {
 var lastPeerId = null;
 var peer = null; // own peer object
 var conn = null;
-var recvIdInput = document.getElementById("receiver-id");
-var status = document.getElementById("status");
-var message = document.getElementById("message");
-var goButton = document.getElementById("goButton");
-var resetButton = document.getElementById("resetButton");
-var fadeButton = document.getElementById("fadeButton");
-var offButton = document.getElementById("offButton");
-var sendMessageBox = document.getElementById("sendMessageBox");
-var sendButton = document.getElementById("sendButton");
-var clearMsgsButton = document.getElementById("clearMsgsButton");
-var connectButton = document.getElementById("connect-button");
-var cueString = "<span class=\"cueMsg\">Cue: </span>";
+
 
 /**
  * Create the Peer object for our end of the connection.
@@ -840,7 +829,6 @@ function initialize() {
         //ready()
     });
     peer.on('disconnected', function () {
-        status.innerHTML = "Connection lost. Please reconnect";
         console.log('Connection lost. Please reconnect');
 
         // Workaround for peer.reconnect deleting previous id
@@ -895,8 +883,8 @@ function join() {
           $('#' + i).removeClass(($('#' + i).attr('class')).slice(11))
           $('#' + i).addClass(board[i - 1])
         }
-        movedPeice[0] = value[5]
-        movedPeice[1] = value[6]
+        movedPiece[0] = value[5]
+        movedPiece[1] = value[6]
         drawBoard()
     });
     conn.on('close', function () {

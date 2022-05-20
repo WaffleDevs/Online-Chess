@@ -144,7 +144,7 @@ function logic(pieceType, pieceColor, id, row, column) {
       }
       if (takeables.includes(whiteKing)) check = 'White';
       if (takeables.includes(blackKing)) check = 'Black';
-      playSound('move')
+      playSound('move-self')
       if (check != '') {
         $('#result').append('<br>' + check + '\'s king is in check!')
       }
@@ -210,7 +210,7 @@ function logic(pieceType, pieceColor, id, row, column) {
         if (check != '') {
             $('#result').append('<br>' + check + '\'s king is in check!')
         }
-        playSound('move')
+        playSound('move-self')
 
         if (conn && conn.open) {
         let data = ''
@@ -272,7 +272,7 @@ function logic(pieceType, pieceColor, id, row, column) {
       if (whiteKing == 'dead' || blackKing == 'dead') return;
       $('#result').append('<br>' + check + '\'s king is in check!')
     }
-    playSound('move')
+    playSound('move-self')
     if (conn && conn.open) {
         let data = ''
         let res = []
@@ -774,7 +774,7 @@ function moddedReset() {
 }
 
 function playSound(sound) {
-  let audio = new Audio(`https://github.com/WaffleDevs/Online-Chess/blob/main/${sound}.mp3`);
+  let audio = new Audio(`https://github.com/WaffleDevs/Online-Chess/blob/main/${sound}.mp3?raw=true`);
   //let audio = new Audio(`file:///home/chronos/u-4d897f5d8e182b99966fd73a4aa007b239388756/MyFiles/Downloads/p2p/${sound}.mp3`);
   audio.play();
 }
@@ -885,7 +885,7 @@ var clearMsgsButton = document.getElementById("clearMsgsButton");
  */
 function ready() {
     conn.on('data', function (data) {
-        playSound('move')
+        playSound('move-self')
       let value = `${data}`.split(';')
         console.log(value)
         turn = value[1]

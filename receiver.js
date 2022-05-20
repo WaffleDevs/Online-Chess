@@ -4,6 +4,7 @@ var selectedpiece = {
   'color': undefined,
   'takeables': []
 };
+let movedPeice = []
 var whiteKing = 5
 var blackKing = 61
 var turn = 'w'
@@ -61,6 +62,8 @@ function drawBoard(callMain) {
     removePieceImage(i + "i")
     appendPieceImage(($('#' + i).attr('class')).slice(11), i, i + "i")
   }
+  $(`#${movedPeice[0]}`).css('background-color', '#55a')
+  $(`#${movedPeice[1]}`).css('background-color', '#aaf')
 }
 drawBoard()
 
@@ -141,6 +144,7 @@ function logic(pieceType, pieceColor, id, row, column) {
       }
       if (takeables.includes(whiteKing)) check = 'White';
       if (takeables.includes(blackKing)) check = 'Black';
+      playSound('move')
       if (check != '') {
         $('#result').append('<br>' + check + '\'s king is in check!')
       }
@@ -150,10 +154,15 @@ function logic(pieceType, pieceColor, id, row, column) {
         for (let i = 1; i <= 64; i++) {
             res.push(($('#' + i).attr('class')).slice(11))
         }
-        console.log(moved.join(','))
-        data = `${res};${turn};${whiteKing};${blackKing};${moved.join(',')}`;
+        data = `${res};${turn};${whiteKing};${blackKing};${moved.join(',')};${id};${selectedpiece.id}`;
         conn.send(data);
    }
+      selectedpiece = {
+        'id': undefined,
+        'type': undefined,
+        'color': undefined,
+        'takeables': []
+      };
       return;
     }
 
@@ -186,12 +195,6 @@ function logic(pieceType, pieceColor, id, row, column) {
         moved.push(selectedpiece.id)
         moved.push(id)
         drawBoard()
-        selectedpiece = {
-            'id': undefined,
-            'type': undefined,
-            'color': undefined,
-            'takeables': []
-        };
         takeables = []
         check = ''
         for (let i = 1; i <= 64; i++) {
@@ -207,16 +210,23 @@ function logic(pieceType, pieceColor, id, row, column) {
         if (check != '') {
             $('#result').append('<br>' + check + '\'s king is in check!')
         }
+        playSound('move')
+
         if (conn && conn.open) {
         let data = ''
         let res = []
         for (let i = 1; i <= 64; i++) {
             res.push(($('#' + i).attr('class')).slice(11))
         }
-        console.log(moved.join(','))
-        data = `${res};${turn};${whiteKing};${blackKing};${moved.join(',')}`;
+        data = `${res};${turn};${whiteKing};${blackKing};${moved.join(',')};${id};${selectedpiece.id}`;
         conn.send(data);
    }
+      selectedpiece = {
+            'id': undefined,
+            'type': undefined,
+            'color': undefined,
+            'takeables': []
+        };
         return;
     }
 
@@ -246,12 +256,6 @@ function logic(pieceType, pieceColor, id, row, column) {
     }
     if (selectedpiece.type == 'rook') moved.push(id)
     if (selectedpiece.type == 'king') moved.push(id)
-    selectedpiece = {
-      'id': undefined,
-      'type': undefined,
-      'color': undefined,
-      'takeables': []
-    };
     takeables = []
     check = ''
     for (let i = 1; i <= 64; i++) {
@@ -268,16 +272,22 @@ function logic(pieceType, pieceColor, id, row, column) {
       if (whiteKing == 'dead' || blackKing == 'dead') return;
       $('#result').append('<br>' + check + '\'s king is in check!')
     }
+    playSound('move')
     if (conn && conn.open) {
         let data = ''
         let res = []
         for (let i = 1; i <= 64; i++) {
             res.push(($('#' + i).attr('class')).slice(11))
         }
-        console.log(moved.join(','))
-        data = `${res};${turn};${whiteKing};${blackKing};${moved.join(',')}`;
+        data = `${res};${turn};${whiteKing};${blackKing};${moved.join(',')};${id};${selectedpiece.id}`;
         conn.send(data);
    }
+    selectedpiece = {
+      'id': undefined,
+      'type': undefined,
+      'color': undefined,
+      'takeables': []
+    };
     return;
   }
   if (pieceColor != turn && pieceType != '') return;
@@ -763,7 +773,11 @@ function moddedReset() {
     //Still no mods in the base game
 }
 
-
+function playSound(sound) {
+  let audio = new Audio(`https://github.com/WaffleDevs/Online-Chess/blob/main/${sound}.mp3`);
+  //let audio = new Audio(`file:///home/chronos/u-4d897f5d8e182b99966fd73a4aa007b239388756/MyFiles/Downloads/p2p/${sound}.mp3`);
+  audio.play();
+}
 
 
 
@@ -871,20 +885,24 @@ var clearMsgsButton = document.getElementById("clearMsgsButton");
  */
 function ready() {
     conn.on('data', function (data) {
-    	let value = `${data}`.split(';')
+        playSound('move')
+      let value = `${data}`.split(';')
         console.log(value)
         turn = value[1]
         whiteKing = value[2]
         blackKing = value[3]
+        console.log(`${value[5]} ${value[6]}`)
         console.log(value[4])
         if(value[4]) moved = value[4].split(',')
-	    let board = value[0].split(',')
-	    console.log(board)
-	    for (let i = 1; i <= 64; i++) {
-	      $('#' + i).removeClass(($('#' + i).attr('class')).slice(11))
-	      $('#' + i).addClass(board[i - 1])
-	    }
-	    drawBoard()
+      let board = value[0].split(',')
+      console.log(board)
+      for (let i = 1; i <= 64; i++) {
+        $('#' + i).removeClass(($('#' + i).attr('class')).slice(11))
+        $('#' + i).addClass(board[i - 1])
+      }
+        movedPeice[0] = value[5]
+        movedPeice[1] = value[6]
+      drawBoard()
     });
     conn.on('close', function () {
         status.innerHTML = "Connection reset<br>Awaiting connection...";

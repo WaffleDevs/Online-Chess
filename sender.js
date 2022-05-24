@@ -778,17 +778,7 @@ var lastPeerId = null;
 var peer = null; // own peer object
 var conn = null;
 var recvIdInput = document.getElementById("receiver-id");
-var status = document.getElementById("status");
-var message = document.getElementById("message");
-var goButton = document.getElementById("goButton");
-var resetButton = document.getElementById("resetButton");
-var fadeButton = document.getElementById("fadeButton");
-var offButton = document.getElementById("offButton");
-var sendMessageBox = document.getElementById("sendMessageBox");
-var sendButton = document.getElementById("sendButton");
-var clearMsgsButton = document.getElementById("clearMsgsButton");
 var connectButton = document.getElementById("connect-button");
-var cueString = "<span class=\"cueMsg\">Cue: </span>";
 
 /**
  * Create the Peer object for our end of the connection.

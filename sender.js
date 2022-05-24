@@ -790,7 +790,7 @@ var lastPeerId = null;
 var peer = null; // own peer object
 var conn = null;
 let connectButton = document.getElementById("connect-button")
-
+let recvIdInput = document.getElementById("receiver-id")
 /**
  * Create the Peer object for our end of the connection.
  *

@@ -802,7 +802,7 @@ var lastPeerId = null;
 var peer = null; // Own peer object
 var peerId = null;
 var conn = null;
-
+let recvId = documemt.getElementById("receiver-id")
 
 /**
  * Create the Peer object for our end of the connection.

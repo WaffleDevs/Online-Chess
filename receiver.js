@@ -783,7 +783,6 @@ function moddedReset() {
 
 
 
-
 var lastPeerId = null;
 var peer = null; // Own peer object
 var peerId = null;
